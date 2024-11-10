@@ -4,13 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-// import { StudentRoutes } from './';
+const book_route_1 = require("../modules/Book/book.route");
 const router = express_1.default.Router();
-// const moduleRoutes = [
-//   {
-//     path: '/students',
-//     // route: StudentRoutes,
-//   },
-// ];
-// moduleRoutes.forEach((route) => router.use(route.path, route.route));
+const moduleRoutes = [
+    {
+        path: '/books',
+        route: book_route_1.bookRouter,
+    },
+];
+moduleRoutes.forEach((route) => router.use(route.path, route.route));
 exports.default = router;
