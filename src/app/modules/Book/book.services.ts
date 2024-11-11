@@ -48,6 +48,7 @@ const UpdateBook = async (id: string, payload: Partial<Book>) => {
   return result;
 };
 
+// Delete book service
 const DeleteBook = async (id: string) => {
   await prisma.book.findUniqueOrThrow({
     where: {

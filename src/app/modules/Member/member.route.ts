@@ -1,5 +1,5 @@
 import express from 'express';
-import requestValidation from '../../utils/validationSchema';
+import requestValidation from '../../utils/requestValidation';
 import { memberController } from './member.controller';
 import { createMemberSchema, updateMemberSchema } from './member.validation';
 

@@ -14,7 +14,7 @@ const createBook = (0, catchAsync_1.default)(async (req, res) => {
     (0, successRespon_1.default)(res, {
         status: http_status_1.default.OK,
         success: true,
-        message: 'Book created successfully"',
+        message: 'Book created successfully',
         data,
     });
 });
@@ -30,8 +30,8 @@ const RetrieveAllBooks = (0, catchAsync_1.default)(async (req, res) => {
 });
 // Retrieve book by id
 const RetrieveBookById = (0, catchAsync_1.default)(async (req, res) => {
-    const { id } = req.params;
-    const data = await book_services_1.bookService.RetrieveBookById(id);
+    const { bookId } = req.params;
+    const data = await book_services_1.bookService.RetrieveBookById(bookId);
     (0, successRespon_1.default)(res, {
         status: http_status_1.default.OK,
         success: true,
@@ -41,8 +41,8 @@ const RetrieveBookById = (0, catchAsync_1.default)(async (req, res) => {
 });
 // Update book controller
 const UpdateBook = (0, catchAsync_1.default)(async (req, res) => {
-    const { id } = req.params;
-    const data = await book_services_1.bookService.UpdateBook(id, req.body);
+    const { bookId } = req.params;
+    const data = await book_services_1.bookService.UpdateBook(bookId, req.body);
     (0, successRespon_1.default)(res, {
         status: http_status_1.default.OK,
         success: true,
@@ -50,14 +50,15 @@ const UpdateBook = (0, catchAsync_1.default)(async (req, res) => {
         data,
     });
 });
+// Delete book controller
 const DeleteBook = (0, catchAsync_1.default)(async (req, res) => {
-    const { id } = req.params;
-    const data = await book_services_1.bookService.DeleteBook(id);
+    const { bookId } = req.params;
+    await book_services_1.bookService.DeleteBook(bookId);
     (0, successRespon_1.default)(res, {
         status: http_status_1.default.OK,
         success: true,
-        message: 'Updated book successfully!',
-        data,
+        message: 'Book successfully deleted',
+        // data,
     });
 });
 exports.bookController = {

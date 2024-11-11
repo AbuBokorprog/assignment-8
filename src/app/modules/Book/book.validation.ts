@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const createBookSchema = z.object({
   title: z.string().min(1, { message: 'Title is required' }),
   genre: z.string().min(1, { message: 'Genre is required' }),
-  publishedYear: z.string({ required_error: 'Invalid year' }),
+  publishedYear: z.number().int({ message: 'Invalid year' }),
   totalCopies: z
     .number()
     .int()
@@ -19,7 +19,7 @@ export const createBookSchema = z.object({
 export const updateBookSchema = z.object({
   title: z.string().optional(),
   genre: z.string().optional(),
-  publishedYear: z.string().optional(),
+  publishedYear: z.number().int().optional(),
   totalCopies: z.number().int().optional(),
   availableCopies: z.number().int().optional(),
 });
