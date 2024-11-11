@@ -38,58 +38,6 @@ const createBorrowRecord = async (payload: any) => {
   return result;
 };
 
-// const RetrieveAllBorrowRecords = async () => {
-//   const result = await prisma.borrowRecord.findMany({});
-
-//   return result;
-// };
-
-// const RetrieveBorrowRecordById = async (id: string) => {
-//   const result = await prisma.borrowRecord.findUnique({
-//     where: {
-//       borrowId: id,
-//     },
-//   });
-
-//   return result;
-// };
-
-// const UpdateBorrowRecord = async (
-//   id: string,
-//   payload: Partial<BorrowRecord>,
-// ) => {
-//   await prisma.borrowRecord.findUniqueOrThrow({
-//     where: {
-//       borrowId: id,
-//     },
-//   });
-
-//   const result = await prisma.borrowRecord.update({
-//     where: {
-//       borrowId: id,
-//     },
-//     data: payload,
-//   });
-
-//   return result;
-// };
-
-// const DeleteBorrowRecord = async (id: string) => {
-//   await prisma.borrowRecord.findUniqueOrThrow({
-//     where: {
-//       borrowId: id,
-//     },
-//   });
-
-//   const result = await prisma.borrowRecord.delete({
-//     where: {
-//       borrowId: id,
-//     },
-//   });
-
-//   return result;
-// };
-
 const returnBorrowBook = async (payload: Partial<BorrowRecord>) => {
   await prisma.borrowRecord.findUniqueOrThrow({
     where: {
@@ -109,11 +57,53 @@ const returnBorrowBook = async (payload: Partial<BorrowRecord>) => {
   return result;
 };
 
+const overdueBooks = async () => {
+  // current date
+  const currentDate = new Date();
+
+  // Get overdue borrow books
+  const overdueBooks = await prisma.borrowRecord.findMany({
+    where: {
+      borrowDate: {
+        lt: currentDate,
+      },
+      returnDate: null,
+    },
+    include: {
+      book: true,
+      member: true,
+    },
+  });
+
+  // if there is no overdue book then return []
+  if (overdueBooks?.length === 0) {
+    return [];
+  }
+
+  // if there have overdue books
+  if (overdueBooks?.length > 0) {
+    // overdue books
+    const overdueData = overdueBooks?.map((borrowBook) => {
+      // calculate the over due days.
+      const overDueDays: any = Math.floor(
+        (currentDate - new Date(borrowBook.borrowDate)) / (1000 * 60 * 60 * 24),
+      );
+
+      // return borrow book
+      return {
+        borrowId: borrowBook.borrowId,
+        bookTitle: borrowBook.book.title,
+        borrowerName: borrowBook.member.name,
+        overdueDays: overDueDays,
+      };
+    });
+
+    return overdueData;
+  }
+};
+
 export const borrowRecordService = {
   createBorrowRecord,
-  // RetrieveAllBorrowRecords,
-  // RetrieveBorrowRecordById,
-  // UpdateBorrowRecord,
-  // DeleteBorrowRecord,
+  overdueBooks,
   returnBorrowBook,
 };

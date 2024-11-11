@@ -19,5 +19,6 @@ router.post(
 // router.delete('/:id', borrowRecordController.DeleteBorrowRecord);
 
 router.patch('/return', borrowRecordController.returnBorrowBook);
+router.get('/overdue', borrowRecordController.overdueBooks);
 
 export const borrowRecordRouter = router;
