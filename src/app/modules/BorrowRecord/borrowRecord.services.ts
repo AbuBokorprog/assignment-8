@@ -3,7 +3,7 @@ import { BorrowRecord, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const createBorrowRecord = async (payload: any) => {
+const createBorrowRecord = async (payload: BorrowRecord) => {
   // get the specific book by bookId
   const book = await prisma.book.findUniqueOrThrow({
     where: {
@@ -33,25 +33,6 @@ const createBorrowRecord = async (payload: any) => {
     });
 
     return result;
-  });
-
-  return result;
-};
-
-const returnBorrowBook = async (payload: Partial<BorrowRecord>) => {
-  await prisma.borrowRecord.findUniqueOrThrow({
-    where: {
-      borrowId: payload.borrowId,
-    },
-  });
-
-  const result = await prisma.borrowRecord.update({
-    where: {
-      borrowId: payload.borrowId,
-    },
-    data: {
-      returnDate: new Date(), // This sets the returnDate to the current date and time
-    },
   });
 
   return result;
@@ -105,5 +86,4 @@ const overdueBooks = async () => {
 export const borrowRecordService = {
   createBorrowRecord,
   overdueBooks,
-  returnBorrowBook,
 };

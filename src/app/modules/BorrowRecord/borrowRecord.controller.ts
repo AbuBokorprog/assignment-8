@@ -62,16 +62,6 @@ const createBorrowRecord = catchAsync(async (req, res) => {
 //   });
 // });
 
-const returnBorrowBook = catchAsync(async (req, res) => {
-  await borrowRecordService.returnBorrowBook(req.body);
-
-  successResponse(res, {
-    status: httpStatus.OK,
-    success: true,
-    message: 'Book returned successfully',
-  });
-});
-
 const overdueBooks = catchAsync(async (req, res) => {
   const data: any = await borrowRecordService.overdueBooks();
 
@@ -80,7 +70,7 @@ const overdueBooks = catchAsync(async (req, res) => {
       status: httpStatus.OK,
       success: true,
       message: 'Overdue borrow list fetched',
-      data,
+      data: [],
     });
   } else {
     successResponse(res, {
@@ -94,10 +84,5 @@ const overdueBooks = catchAsync(async (req, res) => {
 
 export const borrowRecordController = {
   createBorrowRecord,
-  // RetrieveAllBorrowRecords,
-  // RetrieveBorrowRecordById,
-  // UpdateBorrowRecord,
-  // DeleteBorrowRecord,
-  returnBorrowBook,
   overdueBooks,
 };

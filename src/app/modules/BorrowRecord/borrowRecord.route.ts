@@ -9,16 +9,7 @@ router.post(
   requestValidation(createBorrowRecordSchema),
   borrowRecordController.createBorrowRecord,
 );
-// router.get('/', borrowRecordController.RetrieveAllBorrowRecords);
-// router.get('/:id', borrowRecordController.RetrieveBorrowRecordById);
-// router.patch(
-//   '/:id',
-//   requestValidation(updateBorrowRecordSchema),
-//   borrowRecordController.UpdateBorrowRecord,
-// );
-// router.delete('/:id', borrowRecordController.DeleteBorrowRecord);
 
-router.patch('/return', borrowRecordController.returnBorrowBook);
 router.get('/overdue', borrowRecordController.overdueBooks);
 
 export const borrowRecordRouter = router;
