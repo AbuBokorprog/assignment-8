@@ -7,7 +7,7 @@ This is a backend API built for managing a library’s operations. The system al
 
 ## **Live URL**
 
-- [Live Deployment Link](#) _(Insert the link to your live backend deployment here)_
+- [Live Deployment Link](#) _([Library management system](https://library-management-roan-mu.vercel.app/))_
 
 ## **Technology Stack & Packages**
 
@@ -105,9 +105,3 @@ Follow these steps to set up and run the project locally:
 
 - **Overdue Books:**
   - Admins can view a list of overdue books and borrower details.
-
-## **Known Issues/Bugs**
-
-- **Issue 1:** No functionality for sending overdue reminders to members.
-- **Issue 2:** The search functionality is basic, and advanced filters would be a beneficial enhancement.
-- **Issue 3:** Error handling is minimal and could be improved to handle edge cases (such as duplicate entries).

@@ -9,7 +9,6 @@ const notFoundErrorHandler = (req, res, next) => {
         success: false,
         status: http_status_1.default.NOT_FOUND,
         message: 'API not found',
-        error: '',
     });
 };
 exports.default = notFoundErrorHandler;

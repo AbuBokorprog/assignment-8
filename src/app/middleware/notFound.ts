@@ -12,7 +12,6 @@ const notFoundErrorHandler = (
     success: false,
     status: httpStatus.NOT_FOUND,
     message: 'API not found',
-    error: '',
   });
 };
 
