@@ -18,6 +18,7 @@ const createBook = (0, catchAsync_1.default)(async (req, res) => {
         data,
     });
 });
+// Retrieve all books
 const RetrieveAllBooks = (0, catchAsync_1.default)(async (req, res) => {
     const data = await book_services_1.bookService.RetrieveAllBooks();
     (0, successRespon_1.default)(res, {
@@ -27,6 +28,7 @@ const RetrieveAllBooks = (0, catchAsync_1.default)(async (req, res) => {
         data,
     });
 });
+// Retrieve book by id
 const RetrieveBookById = (0, catchAsync_1.default)(async (req, res) => {
     const { id } = req.params;
     const data = await book_services_1.bookService.RetrieveBookById(id);
@@ -37,13 +39,14 @@ const RetrieveBookById = (0, catchAsync_1.default)(async (req, res) => {
         data,
     });
 });
+// Update book controller
 const UpdateBook = (0, catchAsync_1.default)(async (req, res) => {
     const { id } = req.params;
     const data = await book_services_1.bookService.UpdateBook(id, req.body);
     (0, successRespon_1.default)(res, {
         status: http_status_1.default.OK,
         success: true,
-        message: 'Updated book successfully!',
+        message: 'Book updated successfully',
         data,
     });
 });

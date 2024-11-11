@@ -11,10 +11,12 @@ const createBook = async (payload) => {
     });
     return result;
 };
+// Retrieve books
 const RetrieveAllBooks = async () => {
     const result = await prisma.book.findMany({});
     return result;
 };
+// Retrieve book by id
 const RetrieveBookById = async (id) => {
     const result = await prisma.book.findUnique({
         where: {
@@ -23,6 +25,7 @@ const RetrieveBookById = async (id) => {
     });
     return result;
 };
+// Update book service
 const UpdateBook = async (id, payload) => {
     await prisma.book.findUniqueOrThrow({
         where: {

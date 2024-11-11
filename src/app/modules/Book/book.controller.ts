@@ -15,6 +15,7 @@ const createBook = catchAsync(async (req, res) => {
   });
 });
 
+// Retrieve all books
 const RetrieveAllBooks = catchAsync(async (req, res) => {
   const data = await bookService.RetrieveAllBooks();
 
@@ -26,6 +27,7 @@ const RetrieveAllBooks = catchAsync(async (req, res) => {
   });
 });
 
+// Retrieve book by id
 const RetrieveBookById = catchAsync(async (req, res) => {
   const { id } = req.params;
   const data = await bookService.RetrieveBookById(id);
@@ -38,6 +40,7 @@ const RetrieveBookById = catchAsync(async (req, res) => {
   });
 });
 
+// Update book controller
 const UpdateBook = catchAsync(async (req, res) => {
   const { id } = req.params;
   const data = await bookService.UpdateBook(id, req.body);
@@ -45,7 +48,7 @@ const UpdateBook = catchAsync(async (req, res) => {
   successResponse(res, {
     status: httpStatus.OK,
     success: true,
-    message: 'Updated book successfully!',
+    message: 'Book updated successfully',
     data,
   });
 });
