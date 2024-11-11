@@ -9,9 +9,14 @@ const requestValidation_1 = __importDefault(require("../../utils/requestValidati
 const member_controller_1 = require("./member.controller");
 const member_validation_1 = require("./member.validation");
 const router = express_1.default.Router();
+// create member router
 router.post('/', (0, requestValidation_1.default)(member_validation_1.createMemberSchema), member_controller_1.memberController.createMember);
+// retrieve members router
 router.get('/', member_controller_1.memberController.RetrieveAllMembers);
-router.get('/:id', member_controller_1.memberController.RetrieveMemberById);
-router.patch('/:id', (0, requestValidation_1.default)(member_validation_1.updateMemberSchema), member_controller_1.memberController.UpdateMember);
-router.delete('/:id', member_controller_1.memberController.DeleteMember);
+// create member by id router
+router.get('/:memberId', member_controller_1.memberController.RetrieveMemberById);
+// update member by id router
+router.patch('/:memberId', (0, requestValidation_1.default)(member_validation_1.updateMemberSchema), member_controller_1.memberController.UpdateMember);
+// delete member by id router
+router.delete('/:memberId', member_controller_1.memberController.DeleteMember);
 exports.memberRouter = router;

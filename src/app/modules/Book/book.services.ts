@@ -4,7 +4,7 @@ import { Book, PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 // create book service
-const createBook = async (payload: any) => {
+const createBook = async (payload: Book) => {
   const result = await prisma.book.create({
     data: payload,
   });

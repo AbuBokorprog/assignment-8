@@ -3,7 +3,8 @@ import { Member, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const createMember = async (payload: any) => {
+// create member service
+const createMember = async (payload: Member) => {
   const result = await prisma.member.create({
     data: payload,
   });
@@ -11,12 +12,14 @@ const createMember = async (payload: any) => {
   return result;
 };
 
+// retrieve member service
 const RetrieveAllMembers = async () => {
   const result = await prisma.member.findMany({});
 
   return result;
 };
 
+// retrieve all member service
 const RetrieveMemberById = async (id: string) => {
   const result = await prisma.member.findUnique({
     where: {
@@ -27,6 +30,7 @@ const RetrieveMemberById = async (id: string) => {
   return result;
 };
 
+// update member service
 const UpdateMember = async (id: string, payload: Partial<Member>) => {
   await prisma.member.findUniqueOrThrow({
     where: {
@@ -44,6 +48,7 @@ const UpdateMember = async (id: string, payload: Partial<Member>) => {
   return result;
 };
 
+// delete member service
 const DeleteMember = async (id: string) => {
   await prisma.member.findUniqueOrThrow({
     where: {

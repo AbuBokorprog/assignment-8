@@ -3,61 +3,65 @@ import catchAsync from '../../utils/catchAsync';
 import successResponse from '../../utils/successRespon';
 import { memberService } from './member.services';
 
+// create member controller
 const createMember = catchAsync(async (req, res) => {
   const data = await memberService.createMember(req.body);
 
   successResponse(res, {
-    status: httpStatus.OK,
+    status: httpStatus.CREATED,
     success: true,
-    message: 'Created successfully!',
+    message: 'Member created successfully',
     data,
   });
 });
 
+// retrieve member controller
 const RetrieveAllMembers = catchAsync(async (req, res) => {
   const data = await memberService.RetrieveAllMembers();
 
   successResponse(res, {
     status: httpStatus.OK,
     success: true,
-    message: 'Retrieve All members successfully!',
+    message: 'Members retrieved successfully',
     data,
   });
 });
 
+// retrieve member by id controller
 const RetrieveMemberById = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const data = await memberService.RetrieveMemberById(id);
+  const { memberId } = req.params;
+  const data = await memberService.RetrieveMemberById(memberId);
 
   successResponse(res, {
     status: httpStatus.OK,
     success: true,
-    message: 'Retrieve member successfully!',
+    message: 'Member retrieved successfully',
     data,
   });
 });
 
+// update member controller
 const UpdateMember = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const data = await memberService.UpdateMember(id, req.body);
+  const { memberId } = req.params;
+  const data = await memberService.UpdateMember(memberId, req.body);
 
   successResponse(res, {
     status: httpStatus.OK,
     success: true,
-    message: 'Updated member successfully!',
+    message: 'Member updated successfully',
     data,
   });
 });
 
+// delete member controller
 const DeleteMember = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const data = await memberService.DeleteMember(id);
+  const { memberId } = req.params;
+  await memberService.DeleteMember(memberId);
 
   successResponse(res, {
     status: httpStatus.OK,
     success: true,
-    message: 'Updated member successfully!',
-    data,
+    message: 'Member successfully deleted',
   });
 });
 

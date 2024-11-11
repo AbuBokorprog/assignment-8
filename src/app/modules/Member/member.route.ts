@@ -5,18 +5,27 @@ import { createMemberSchema, updateMemberSchema } from './member.validation';
 
 const router = express.Router();
 
+// create member router
 router.post(
   '/',
   requestValidation(createMemberSchema),
   memberController.createMember,
 );
+
+// retrieve members router
 router.get('/', memberController.RetrieveAllMembers);
-router.get('/:id', memberController.RetrieveMemberById);
+
+// create member by id router
+router.get('/:memberId', memberController.RetrieveMemberById);
+
+// update member by id router
 router.patch(
-  '/:id',
+  '/:memberId',
   requestValidation(updateMemberSchema),
   memberController.UpdateMember,
 );
-router.delete('/:id', memberController.DeleteMember);
+
+// delete member by id router
+router.delete('/:memberId', memberController.DeleteMember);
 
 export const memberRouter = router;

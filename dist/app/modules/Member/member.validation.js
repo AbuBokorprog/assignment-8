@@ -7,12 +7,14 @@ exports.createMemberSchema = zod_1.z.object({
     name: zod_1.z.string().min(1, { message: 'Name is required' }),
     email: zod_1.z.string().email({ message: 'Invalid email address' }),
     phone: zod_1.z.string().min(10, { message: 'Phone number is too short' }),
-    membershipDate: zod_1.z.date(),
+    membershipDate: zod_1.z.preprocess((arg) => (typeof arg === 'string' ? new Date(arg) : arg), zod_1.z.date().optional()),
 });
 // Update Member Schema
 exports.updateMemberSchema = zod_1.z.object({
     name: zod_1.z.string().optional(),
     email: zod_1.z.string().email().optional(),
     phone: zod_1.z.string().optional(),
-    membershipDate: zod_1.z.date().optional(),
+    membershipDate: zod_1.z
+        .preprocess((arg) => (typeof arg === 'string' ? new Date(arg) : arg), zod_1.z.date())
+        .optional(),
 });

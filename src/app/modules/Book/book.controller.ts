@@ -8,7 +8,7 @@ const createBook = catchAsync(async (req, res) => {
   const data = await bookService.createBook(req.body);
 
   successResponse(res, {
-    status: httpStatus.OK,
+    status: httpStatus.CREATED,
     success: true,
     message: 'Book created successfully',
     data,
