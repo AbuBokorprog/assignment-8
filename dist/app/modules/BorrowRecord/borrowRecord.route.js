@@ -10,8 +10,13 @@ const borrowRecord_validation_1 = require("./borrowRecord.validation");
 const borrowRecord_controller_1 = require("./borrowRecord.controller");
 const router = express_1.default.Router();
 router.post('/', (0, requestValidation_1.default)(borrowRecord_validation_1.createBorrowRecordSchema), borrowRecord_controller_1.borrowRecordController.createBorrowRecord);
-router.get('/', borrowRecord_controller_1.borrowRecordController.RetrieveAllBorrowRecords);
-router.get('/:id', borrowRecord_controller_1.borrowRecordController.RetrieveBorrowRecordById);
-router.patch('/:id', (0, requestValidation_1.default)(borrowRecord_validation_1.updateBorrowRecordSchema), borrowRecord_controller_1.borrowRecordController.UpdateBorrowRecord);
-router.delete('/:id', borrowRecord_controller_1.borrowRecordController.DeleteBorrowRecord);
+// router.get('/', borrowRecordController.RetrieveAllBorrowRecords);
+// router.get('/:id', borrowRecordController.RetrieveBorrowRecordById);
+// router.patch(
+//   '/:id',
+//   requestValidation(updateBorrowRecordSchema),
+//   borrowRecordController.UpdateBorrowRecord,
+// );
+// router.delete('/:id', borrowRecordController.DeleteBorrowRecord);
+router.patch('/return', borrowRecord_controller_1.borrowRecordController.returnBorrowBook);
 exports.borrowRecordRouter = router;

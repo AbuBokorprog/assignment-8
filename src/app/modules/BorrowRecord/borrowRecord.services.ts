@@ -4,59 +4,105 @@ import { BorrowRecord, PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const createBorrowRecord = async (payload: any) => {
-  const result = await prisma.borrowRecord.create({
-    data: payload,
-  });
-
-  return result;
-};
-
-const RetrieveAllBorrowRecords = async () => {
-  const result = await prisma.borrowRecord.findMany({});
-
-  return result;
-};
-
-const RetrieveBorrowRecordById = async (id: string) => {
-  const result = await prisma.borrowRecord.findUnique({
+  // get the specific book by bookId
+  const book = await prisma.book.findUniqueOrThrow({
     where: {
-      borrowId: id,
+      bookId: payload.bookId,
     },
   });
 
+  // get the specific member by memberId
+  await prisma.member.findUniqueOrThrow({
+    where: {
+      memberId: payload.memberId,
+    },
+  });
+
+  const result = await prisma.$transaction(async (transactionClient) => {
+    const result = await transactionClient.borrowRecord.create({
+      data: payload,
+    });
+
+    await transactionClient.book.update({
+      where: {
+        bookId: book.bookId,
+      },
+      data: {
+        availableCopies: Number(book.availableCopies - 1),
+      },
+    });
+
+    return result;
+  });
+
   return result;
 };
 
-const UpdateBorrowRecord = async (
-  id: string,
-  payload: Partial<BorrowRecord>,
-) => {
+// const RetrieveAllBorrowRecords = async () => {
+//   const result = await prisma.borrowRecord.findMany({});
+
+//   return result;
+// };
+
+// const RetrieveBorrowRecordById = async (id: string) => {
+//   const result = await prisma.borrowRecord.findUnique({
+//     where: {
+//       borrowId: id,
+//     },
+//   });
+
+//   return result;
+// };
+
+// const UpdateBorrowRecord = async (
+//   id: string,
+//   payload: Partial<BorrowRecord>,
+// ) => {
+//   await prisma.borrowRecord.findUniqueOrThrow({
+//     where: {
+//       borrowId: id,
+//     },
+//   });
+
+//   const result = await prisma.borrowRecord.update({
+//     where: {
+//       borrowId: id,
+//     },
+//     data: payload,
+//   });
+
+//   return result;
+// };
+
+// const DeleteBorrowRecord = async (id: string) => {
+//   await prisma.borrowRecord.findUniqueOrThrow({
+//     where: {
+//       borrowId: id,
+//     },
+//   });
+
+//   const result = await prisma.borrowRecord.delete({
+//     where: {
+//       borrowId: id,
+//     },
+//   });
+
+//   return result;
+// };
+
+const returnBorrowBook = async (payload: Partial<BorrowRecord>) => {
   await prisma.borrowRecord.findUniqueOrThrow({
     where: {
-      borrowId: id,
+      borrowId: payload.borrowId,
     },
   });
 
   const result = await prisma.borrowRecord.update({
     where: {
-      borrowId: id,
+      borrowId: payload.borrowId,
     },
-    data: payload,
-  });
-
-  return result;
-};
-
-const DeleteBorrowRecord = async (id: string) => {
-  await prisma.borrowRecord.findUniqueOrThrow({
-    where: {
-      borrowId: id,
-    },
-  });
-
-  const result = await prisma.borrowRecord.delete({
-    where: {
-      borrowId: id,
+    data: {
+      returnDate: new Date(), // This sets the returnDate to the current date and time
     },
   });
 
@@ -65,8 +111,9 @@ const DeleteBorrowRecord = async (id: string) => {
 
 export const borrowRecordService = {
   createBorrowRecord,
-  RetrieveAllBorrowRecords,
-  RetrieveBorrowRecordById,
-  UpdateBorrowRecord,
-  DeleteBorrowRecord,
+  // RetrieveAllBorrowRecords,
+  // RetrieveBorrowRecordById,
+  // UpdateBorrowRecord,
+  // DeleteBorrowRecord,
+  returnBorrowBook,
 };
