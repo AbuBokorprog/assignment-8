@@ -6,7 +6,7 @@ const zod_1 = require("zod");
 exports.createBookSchema = zod_1.z.object({
     title: zod_1.z.string().min(1, { message: 'Title is required' }),
     genre: zod_1.z.string().min(1, { message: 'Genre is required' }),
-    publishedYear: zod_1.z.number().int().min(1800, { message: 'Invalid year' }),
+    publishedYear: zod_1.z.string({ required_error: 'Invalid year' }),
     totalCopies: zod_1.z
         .number()
         .int()
@@ -20,7 +20,7 @@ exports.createBookSchema = zod_1.z.object({
 exports.updateBookSchema = zod_1.z.object({
     title: zod_1.z.string().optional(),
     genre: zod_1.z.string().optional(),
-    publishedYear: zod_1.z.number().int().optional(),
+    publishedYear: zod_1.z.string().optional(),
     totalCopies: zod_1.z.number().int().optional(),
     availableCopies: zod_1.z.number().int().optional(),
 });

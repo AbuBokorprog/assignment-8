@@ -4,6 +4,7 @@ exports.bookService = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
+// create book service
 const createBook = async (payload) => {
     const result = await prisma.book.create({
         data: payload,

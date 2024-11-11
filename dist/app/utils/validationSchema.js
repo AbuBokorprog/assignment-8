@@ -1,14 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const catchAsync_1 = __importDefault(require("./catchAsync"));
 const requestValidation = (schema) => {
-    return async (req, res, next) => {
-        try {
-            schema.parseAsync(req.body);
-            next();
-        }
-        catch (error) {
-            next(error);
-        }
-    };
+    return (0, catchAsync_1.default)(async (req, res, next) => {
+        schema.parseAsync(req.body);
+        next();
+    });
 };
 exports.default = requestValidation;

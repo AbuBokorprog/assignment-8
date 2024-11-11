@@ -11,7 +11,7 @@ const member_services_1 = require("./member.services");
 const createMember = (0, catchAsync_1.default)(async (req, res) => {
     const data = await member_services_1.memberService.createMember(req.body);
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
         message: 'Created successfully!',
         data,
@@ -20,7 +20,7 @@ const createMember = (0, catchAsync_1.default)(async (req, res) => {
 const RetrieveAllMembers = (0, catchAsync_1.default)(async (req, res) => {
     const data = await member_services_1.memberService.RetrieveAllMembers();
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
         message: 'Retrieve All members successfully!',
         data,
@@ -30,7 +30,7 @@ const RetrieveMemberById = (0, catchAsync_1.default)(async (req, res) => {
     const { id } = req.params;
     const data = await member_services_1.memberService.RetrieveMemberById(id);
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
         message: 'Retrieve member successfully!',
         data,
@@ -40,7 +40,7 @@ const UpdateMember = (0, catchAsync_1.default)(async (req, res) => {
     const { id } = req.params;
     const data = await member_services_1.memberService.UpdateMember(id, req.body);
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
         message: 'Updated member successfully!',
         data,
@@ -50,7 +50,7 @@ const DeleteMember = (0, catchAsync_1.default)(async (req, res) => {
     const { id } = req.params;
     const data = await member_services_1.memberService.DeleteMember(id);
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
         message: 'Updated member successfully!',
         data,

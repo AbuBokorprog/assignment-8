@@ -8,21 +8,22 @@ const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const successRespon_1 = __importDefault(require("../../utils/successRespon"));
 const book_services_1 = require("./book.services");
+// create book controller
 const createBook = (0, catchAsync_1.default)(async (req, res) => {
     const data = await book_services_1.bookService.createBook(req.body);
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
-        message: 'Created successfully!',
+        message: 'Book created successfully"',
         data,
     });
 });
 const RetrieveAllBooks = (0, catchAsync_1.default)(async (req, res) => {
     const data = await book_services_1.bookService.RetrieveAllBooks();
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
-        message: 'Retrieve All books successfully!',
+        message: 'Books retrieved successfully',
         data,
     });
 });
@@ -30,9 +31,9 @@ const RetrieveBookById = (0, catchAsync_1.default)(async (req, res) => {
     const { id } = req.params;
     const data = await book_services_1.bookService.RetrieveBookById(id);
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
-        message: 'Retrieve book successfully!',
+        message: 'Book retrieved successfully',
         data,
     });
 });
@@ -40,7 +41,7 @@ const UpdateBook = (0, catchAsync_1.default)(async (req, res) => {
     const { id } = req.params;
     const data = await book_services_1.bookService.UpdateBook(id, req.body);
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
         message: 'Updated book successfully!',
         data,
@@ -50,7 +51,7 @@ const DeleteBook = (0, catchAsync_1.default)(async (req, res) => {
     const { id } = req.params;
     const data = await book_services_1.bookService.DeleteBook(id);
     (0, successRespon_1.default)(res, {
-        statusCode: http_status_1.default.OK,
+        status: http_status_1.default.OK,
         success: true,
         message: 'Updated book successfully!',
         data,

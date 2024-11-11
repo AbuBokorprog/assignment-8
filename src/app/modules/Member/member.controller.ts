@@ -7,7 +7,7 @@ const createMember = catchAsync(async (req, res) => {
   const data = await memberService.createMember(req.body);
 
   successResponse(res, {
-    statusCode: httpStatus.OK,
+    status: httpStatus.OK,
     success: true,
     message: 'Created successfully!',
     data,
@@ -18,7 +18,7 @@ const RetrieveAllMembers = catchAsync(async (req, res) => {
   const data = await memberService.RetrieveAllMembers();
 
   successResponse(res, {
-    statusCode: httpStatus.OK,
+    status: httpStatus.OK,
     success: true,
     message: 'Retrieve All members successfully!',
     data,
@@ -30,7 +30,7 @@ const RetrieveMemberById = catchAsync(async (req, res) => {
   const data = await memberService.RetrieveMemberById(id);
 
   successResponse(res, {
-    statusCode: httpStatus.OK,
+    status: httpStatus.OK,
     success: true,
     message: 'Retrieve member successfully!',
     data,
@@ -42,7 +42,7 @@ const UpdateMember = catchAsync(async (req, res) => {
   const data = await memberService.UpdateMember(id, req.body);
 
   successResponse(res, {
-    statusCode: httpStatus.OK,
+    status: httpStatus.OK,
     success: true,
     message: 'Updated member successfully!',
     data,
@@ -54,7 +54,7 @@ const DeleteMember = catchAsync(async (req, res) => {
   const data = await memberService.DeleteMember(id);
 
   successResponse(res, {
-    statusCode: httpStatus.OK,
+    status: httpStatus.OK,
     success: true,
     message: 'Updated member successfully!',
     data,

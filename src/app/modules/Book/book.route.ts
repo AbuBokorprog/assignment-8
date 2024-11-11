@@ -4,6 +4,7 @@ import requestValidation from '../../utils/validationSchema';
 import { createBookSchema, updateBookSchema } from './book.validation';
 const router = express.Router();
 
+// create book router
 router.post(
   '/',
   requestValidation(createBookSchema),

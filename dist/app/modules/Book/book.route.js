@@ -9,6 +9,7 @@ const book_controller_1 = require("./book.controller");
 const validationSchema_1 = __importDefault(require("../../utils/validationSchema"));
 const book_validation_1 = require("./book.validation");
 const router = express_1.default.Router();
+// create book router
 router.post('/', (0, validationSchema_1.default)(book_validation_1.createBookSchema), book_controller_1.bookController.createBook);
 router.get('/', book_controller_1.bookController.RetrieveAllBooks);
 router.get('/:id', book_controller_1.bookController.RetrieveBookById);
