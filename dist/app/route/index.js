@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const book_route_1 = require("../modules/Book/book.route");
 const member_route_1 = require("../modules/Member/member.route");
 const borrowRecord_route_1 = require("../modules/BorrowRecord/borrowRecord.route");
+const returnBook_route_1 = require("../modules/ReturnBook/returnBook.route");
 const router = express_1.default.Router();
 const moduleRoutes = [
     {
@@ -20,6 +21,10 @@ const moduleRoutes = [
     {
         path: '/borrow',
         route: borrowRecord_route_1.borrowRecordRouter,
+    },
+    {
+        path: '/return',
+        route: returnBook_route_1.returnRouter,
     },
 ];
 moduleRoutes.forEach((route) => router.use(route.path, route.route));

@@ -63,19 +63,23 @@ const overdueBooks = async () => {
 
   // if there have overdue books
   if (overdueBooks?.length > 0) {
-    // overdue books
-    const overdueData = overdueBooks?.map((borrowBook) => {
-      // calculate the over due days.
-      const overDueDays: any = Math.floor(
-        (currentDate - new Date(borrowBook.borrowDate)) / (1000 * 60 * 60 * 24),
+    const currentDate = new Date(); // Ensure currentDate is a Date object
+
+    // Process overdue books
+    const overdueData = overdueBooks.map((borrowBook) => {
+      // Convert borrowDate to a Date object
+      const borrowDate = new Date(borrowBook.borrowDate);
+
+      // Calculate the overdue days
+      const overdueDays = Math.floor(
+        (currentDate.getTime() - borrowDate.getTime()) / (1000 * 60 * 60 * 24),
       );
 
-      // return borrow book
       return {
         borrowId: borrowBook.borrowId,
         bookTitle: borrowBook.book.title,
         borrowerName: borrowBook.member.name,
-        overdueDays: overDueDays,
+        overdueDays,
       };
     });
 

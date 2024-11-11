@@ -70,7 +70,7 @@ const overdueBooks = catchAsync(async (req, res) => {
       status: httpStatus.OK,
       success: true,
       message: 'Overdue borrow list fetched',
-      data: [],
+      data: data,
     });
   } else {
     successResponse(res, {
