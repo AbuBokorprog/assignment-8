@@ -7,5 +7,5 @@ exports.returnRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const returnBook_controller_1 = require("./returnBook.controller");
 const router = express_1.default.Router();
-router.patch('/', returnBook_controller_1.returnBookController.returnBorrowBook);
+router.post('/', returnBook_controller_1.returnBookController.returnBorrowBook);
 exports.returnRouter = router;

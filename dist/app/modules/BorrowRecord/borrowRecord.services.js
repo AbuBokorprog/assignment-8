@@ -40,7 +40,7 @@ const overdueBooks = async () => {
     const overdueBooks = await prisma.borrowRecord.findMany({
         where: {
             borrowDate: {
-                lt: currentDate,
+                lt: new Date(currentDate.getTime() - 14 * 24 * 60 * 60 * 1000),
             },
             returnDate: null,
         },
@@ -49,19 +49,20 @@ const overdueBooks = async () => {
             member: true,
         },
     });
-    // if there is no overdue book then return []
-    if (overdueBooks?.length === 0) {
+    // If there are no overdue books, return an empty array
+    if (overdueBooks.length === 0) {
         return [];
     }
     // if there have overdue books
-    if (overdueBooks?.length > 0) {
-        const currentDate = new Date(); // Ensure currentDate is a Date object
-        // Process overdue books
+    if (overdueBooks && overdueBooks?.length > 0) {
+        const currentDate = new Date();
         const overdueData = overdueBooks.map((borrowBook) => {
             // Convert borrowDate to a Date object
             const borrowDate = new Date(borrowBook.borrowDate);
             // Calculate the overdue days
-            const overdueDays = Math.floor((currentDate.getTime() - borrowDate.getTime()) / (1000 * 60 * 60 * 24));
+            const overdueDays = Math.floor((currentDate.getTime() -
+                (borrowDate.getTime() + 14 * 24 * 60 * 60 * 1000)) /
+                (1000 * 60 * 60 * 24));
             return {
                 borrowId: borrowBook.borrowId,
                 bookTitle: borrowBook.book.title,
